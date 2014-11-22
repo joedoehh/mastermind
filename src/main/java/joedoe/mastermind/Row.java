@@ -37,7 +37,7 @@ public class Row {
 		this.rating = null;
 	}
 
-	public RowRating rate(Row rowToCompareWith) {
+	public void rate(Row rowToCompareWith) {
 		Preconditions.checkNotNull(rowToCompareWith);
 		Preconditions.checkArgument(row.length == rowToCompareWith.row.length,
 				"to compare both rows need to have same dimension, this row "
@@ -53,26 +53,34 @@ public class Row {
 			else if (colorMatch(colorAtPosition))
 				nrOfColorMatches++;
 		}
-		return new RowRating(nrOfExactMatches, nrOfColorMatches);
+		rating = new RowRating(nrOfExactMatches, nrOfColorMatches);
 	}
 
 	public Color getColor(int position) {
-		Preconditions.checkArgument((position >= 0 && position < row.length),
+		Preconditions.checkArgument((position >= 0 && position < getDimension()),
 				"a row position for row " + Arrays.toString(row)
-						+ " needs to have an index in [0," + (row.length - 1)
+						+ " needs to have an index in [0," + (getDimension() - 1)
 						+ "], but called with position " + position);
 		return row[position];
 	}
 	
 	public boolean isRated() {
-		return rating == null;
+		return rating != null;
 	}
 	
 	public RowRating getRating() {
 		return rating;
 	}
 
+	public void setRating(RowRating rowRating) {
+		Preconditions.checkNotNull(rowRating);
+		this.rating = rowRating;
+	}
 	
+	public int getDimension() {
+		return row.length;
+	}
+			
 	@Override
 	public int hashCode() {
 		final int prime = 31;

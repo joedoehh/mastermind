@@ -67,36 +67,36 @@ public class RowTest {
 	public void rateCompleteExact() {
 		Row row = new Row(Color.BLUE, Color.WHITE, Color.GREEN);
 		Row rowToCompareWith = new Row(Color.BLUE, Color.WHITE, Color.GREEN);
-		RowRating rating = row.rate(rowToCompareWith);
-		assertThat(rating.getNrExactMatch(), is(3));
-		assertThat(rating.getNrOnlyColorMatch(), is(0));
+		row.rate(rowToCompareWith);
+		assertThat(row.getRating().getNrExactMatch(), is(3));
+		assertThat(row.getRating().getNrOnlyColorMatch(), is(0));
 	}
 
 	@Test
 	public void rateColorMatches() {
 		Row row = new Row(Color.BLUE, Color.WHITE, Color.GREEN);
 		Row rowToCompareWith = new Row(Color.WHITE, Color.GREEN, Color.BLUE);
-		RowRating rating = row.rate(rowToCompareWith);
-		assertThat(rating.getNrExactMatch(), is(0));
-		assertThat(rating.getNrOnlyColorMatch(), is(3));
+		row.rate(rowToCompareWith);
+		assertThat(row.getRating().getNrExactMatch(), is(0));
+		assertThat(row.getRating().getNrOnlyColorMatch(), is(3));
 	}	
 	
 	@Test
 	public void rateMixedMatches() {
 		Row row = new Row(Color.BLUE, Color.WHITE, Color.GREEN);
 		Row rowToCompareWith = new Row(Color.BLUE, Color.GREEN, Color.ORANGE);
-		RowRating rating = row.rate(rowToCompareWith);
-		assertThat(rating.getNrExactMatch(), is(1));
-		assertThat(rating.getNrOnlyColorMatch(), is(1));
+		row.rate(rowToCompareWith);
+		assertThat(row.getRating().getNrExactMatch(), is(1));
+		assertThat(row.getRating().getNrOnlyColorMatch(), is(1));
 	}		
 	
 	@Test
 	public void rateNothingMatches() {
 		Row row = new Row(Color.BLUE, Color.WHITE, Color.GREEN);
 		Row rowToCompareWith = new Row(Color.ORANGE, Color.PINK, Color.RED);
-		RowRating rating = row.rate(rowToCompareWith);
-		assertThat(rating.getNrExactMatch(), is(0));
-		assertThat(rating.getNrOnlyColorMatch(), is(0));
+		row.rate(rowToCompareWith);
+		assertThat(row.getRating().getNrExactMatch(), is(0));
+		assertThat(row.getRating().getNrOnlyColorMatch(), is(0));
 	}		
 	
 	@Test

@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ RowRatingTest.class, RowTest.class, SolutionSpaceTest.class })
+@SuiteClasses({ RowRatingTest.class, RowTest.class, SolutionSpaceTest.class, SolverTest.class })
 public class MastermindAllTests {
 
 }

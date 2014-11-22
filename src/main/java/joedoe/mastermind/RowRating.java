@@ -29,7 +29,7 @@ public class RowRating {
 	public int getNrOnlyColorMatch() {
 		return nrOnlyColorMatch;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

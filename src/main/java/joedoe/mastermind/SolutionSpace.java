@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 import com.google.common.base.Preconditions;
 
@@ -34,13 +35,13 @@ public class SolutionSpace {
 		return space.toArray(new Row[space.size()]);
 	}
 
-	public SolutionSpace filter(Row rowTemplate, RowRating rowTemplateRating) {
+	public SolutionSpace filter(Row rowTemplate) {
 		Preconditions.checkNotNull(rowTemplate);
-		Preconditions.checkNotNull(rowTemplateRating);
+		Preconditions.checkArgument(rowTemplate.isRated());
 		List<Row> filteredElements = new ArrayList<Row>();
 		for (Row nextRowToMatch : getSolutionSpaceElements()) {
-			RowRating rating = nextRowToMatch.rate(rowTemplate);
-			if (rating.equals(rowTemplateRating)) filteredElements.add(nextRowToMatch);
+			nextRowToMatch.rate(rowTemplate);
+			if (nextRowToMatch.getRating().equals(rowTemplate.getRating())) filteredElements.add(nextRowToMatch);
 		}
 		return new SolutionSpace(filteredElements);
 	}
@@ -53,9 +54,19 @@ public class SolutionSpace {
 		Preconditions.checkNotNull(intersectSpace);
 		List<Row> intersectedRows= new ArrayList<Row>();
 		for (Row row : space) {
-			
+			if (intersectSpace.containsRow(row)) intersectedRows.add(row);
 		}
 		return new SolutionSpace(intersectedRows);
+	}
+
+	public Row randomPick() {
+		int randomIndex = new Random().nextInt(space.size());
+		return space.get(randomIndex);
+	}
+		
+	@Override
+	public String toString() {
+		return "SolutionSpace [length=" + length + ", space=" + space + "]";
 	}
 
 	private void initializeSpace(List<Row> spaceToInit, int lengthLeft,
@@ -94,7 +105,5 @@ public class SolutionSpace {
 			space.add(row);
 		}
 	}
-
-
 
 }

@@ -60,42 +60,48 @@ public class SolutionSpaceTest {
 
 	@Test(expected = NullPointerException.class)
 	public void filterNoRow() {
-		SolutionSpace solSpace = new SolutionSpace(1);
-		solSpace.filter(null, new RowRating(1, 0));
+		new SolutionSpace(1).filter(null);
 	}	
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void filterNoRating() {
-		SolutionSpace solSpace = new SolutionSpace(1);
-		solSpace.filter(new Row(Color.BLUE), null);
+		new SolutionSpace(1).filter(new Row(Color.BLUE));
 	}	
 	
 	
 	@Test
 	public void filterBlueExact() {
 		SolutionSpace solSpace = new SolutionSpace(1);
-		SolutionSpace filtered = solSpace.filter(new Row(Color.BLUE), new RowRating(1, 0));
+		Row row = new Row(Color.BLUE);
+		row.setRating(new RowRating(1, 0));
+		SolutionSpace filtered = solSpace.filter(row);
 		assertThat(filtered.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.BLUE)));
 	}	
 	
 	@Test
 	public void filterBlueWhiteExactly() {
 		SolutionSpace solSpace = new SolutionSpace(2);
-		SolutionSpace filtered = solSpace.filter(new Row(Color.BLUE, Color.WHITE), new RowRating(2, 0));
+		Row row = new Row(Color.BLUE, Color.WHITE);
+		row.setRating(new RowRating(2, 0));
+		SolutionSpace filtered = solSpace.filter(row);
 		assertThat(filtered.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.BLUE, Color.WHITE)));
 	}		
 	
 	@Test
 	public void filterBlueWhiteWithColor() {
 		SolutionSpace solSpace = new SolutionSpace(2);
-		SolutionSpace filtered = solSpace.filter(new Row(Color.BLUE, Color.WHITE), new RowRating(0, 2));
+		Row row = new Row(Color.BLUE, Color.WHITE);
+		row.setRating(new RowRating(0, 2));
+		SolutionSpace filtered = solSpace.filter(row);
 		assertThat(filtered.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.WHITE, Color.BLUE)));
 	}		
 	
 	@Test
 	public void filterStartingWithBlueOrWhite() {
 		SolutionSpace solSpace = new SolutionSpace(2);
-		SolutionSpace filtered = solSpace.filter(new Row(Color.BLUE, Color.WHITE), new RowRating(0, 2));
+		Row row = new Row(Color.BLUE, Color.WHITE);
+		row.setRating(new RowRating(0, 2));
+		SolutionSpace filtered = solSpace.filter(row);
 		assertThat(filtered.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.WHITE, Color.BLUE)));
 	}
 	
@@ -107,8 +113,12 @@ public class SolutionSpaceTest {
 	@Test
 	public void intersect1() {
 		SolutionSpace solSpace = new SolutionSpace(1);
-		SolutionSpace blueFiltered = solSpace.filter(new Row(Color.BLUE), new RowRating(1, 0));
-		SolutionSpace greenFiltered = solSpace.filter(new Row(Color.GREEN), new RowRating(1, 0));
+		Row rowBlue = new Row(Color.BLUE);
+		rowBlue.setRating(new RowRating(1, 0));
+		Row rowGreen = new Row(Color.GREEN);
+		rowGreen.setRating(new RowRating(1, 0));		
+		SolutionSpace blueFiltered = solSpace.filter(rowBlue);
+		SolutionSpace greenFiltered = solSpace.filter(rowGreen);
 		SolutionSpace intersect = blueFiltered.intersect(greenFiltered);
 		assertThat(intersect.getSolutionSpaceElements().length, is(0));
 	}	
@@ -116,9 +126,20 @@ public class SolutionSpaceTest {
 	@Test
 	public void intersect2() {
 		SolutionSpace solSpace = new SolutionSpace(1);
-		SolutionSpace blueFiltered = solSpace.filter(new Row(Color.BLUE), new RowRating(1, 0));
+		Row rowBlue = new Row(Color.BLUE);
+		rowBlue.setRating(new RowRating(1, 0));		
+		SolutionSpace blueFiltered = solSpace.filter(rowBlue);
 		SolutionSpace intersect = blueFiltered.intersect(blueFiltered);
 		assertThat(intersect.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.BLUE)));
 	}	
-	
+
+	@Test
+	public void intersect3() {
+		SolutionSpace solSpace = new SolutionSpace(1);
+		Row rowBlue = new Row(Color.BLUE);
+		rowBlue.setRating(new RowRating(1, 0));		
+		SolutionSpace blueFiltered = solSpace.filter(rowBlue);
+		SolutionSpace intersect = new SolutionSpace(1).intersect(blueFiltered);
+		assertThat(intersect.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.BLUE)));
+	}		
 }
