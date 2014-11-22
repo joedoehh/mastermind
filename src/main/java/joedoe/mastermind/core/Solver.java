@@ -1,7 +1,10 @@
-package joedoe.mastermind;
+package joedoe.mastermind.core;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import joedoe.mastermind.types.Row;
+import joedoe.mastermind.types.SolutionSpace;
 
 import org.pmw.tinylog.Logger;
 

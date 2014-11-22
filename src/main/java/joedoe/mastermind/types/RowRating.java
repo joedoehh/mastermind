@@ -1,4 +1,4 @@
-package joedoe.mastermind;
+package joedoe.mastermind.types;
 
 import com.google.common.base.Preconditions;
 

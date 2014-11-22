@@ -1,8 +1,12 @@
-package joedoe.mastermind;
+package joedoe.mastermind.types;
 
 import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import joedoe.mastermind.types.Color;
+import joedoe.mastermind.types.Row;
+import joedoe.mastermind.types.RowRating;
+import joedoe.mastermind.types.SolutionSpace;
 
 import org.junit.Test;
 

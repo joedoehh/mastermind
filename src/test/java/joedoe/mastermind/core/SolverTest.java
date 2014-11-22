@@ -1,9 +1,13 @@
-package joedoe.mastermind;
+package joedoe.mastermind.core;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
+
+import joedoe.mastermind.core.Solver;
+import joedoe.mastermind.types.Color;
+import joedoe.mastermind.types.Row;
 
 import org.junit.Test;
 

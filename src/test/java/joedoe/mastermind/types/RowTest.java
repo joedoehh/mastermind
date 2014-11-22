@@ -1,7 +1,9 @@
-package joedoe.mastermind;
+package joedoe.mastermind.types;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
+import joedoe.mastermind.types.Color;
+import joedoe.mastermind.types.Row;
 
 import org.junit.Test;
 

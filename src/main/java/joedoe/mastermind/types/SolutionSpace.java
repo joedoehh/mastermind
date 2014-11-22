@@ -1,4 +1,4 @@
-package joedoe.mastermind;
+package joedoe.mastermind.types;
 
 import java.util.ArrayList;
 import java.util.Arrays;

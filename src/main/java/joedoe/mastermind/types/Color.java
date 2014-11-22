@@ -1,4 +1,4 @@
-package joedoe.mastermind;
+package joedoe.mastermind.types;
 
 public enum Color {
 
