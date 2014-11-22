@@ -60,12 +60,12 @@ public class SolutionSpaceTest {
 
 	@Test(expected = NullPointerException.class)
 	public void filterNoRow() {
-		new SolutionSpace(1).filter(null);
+		new SolutionSpace(1).filterByRating(null);
 	}	
 
 	@Test(expected = IllegalArgumentException.class)
 	public void filterNoRating() {
-		new SolutionSpace(1).filter(new Row(Color.BLUE));
+		new SolutionSpace(1).filterByRating(new Row(Color.BLUE));
 	}	
 	
 	
@@ -74,7 +74,7 @@ public class SolutionSpaceTest {
 		SolutionSpace solSpace = new SolutionSpace(1);
 		Row row = new Row(Color.BLUE);
 		row.setRating(new RowRating(1, 0));
-		SolutionSpace filtered = solSpace.filter(row);
+		SolutionSpace filtered = solSpace.filterByRating(row);
 		assertThat(filtered.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.BLUE)));
 	}	
 	
@@ -83,7 +83,7 @@ public class SolutionSpaceTest {
 		SolutionSpace solSpace = new SolutionSpace(2);
 		Row row = new Row(Color.BLUE, Color.WHITE);
 		row.setRating(new RowRating(2, 0));
-		SolutionSpace filtered = solSpace.filter(row);
+		SolutionSpace filtered = solSpace.filterByRating(row);
 		assertThat(filtered.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.BLUE, Color.WHITE)));
 	}		
 	
@@ -92,7 +92,7 @@ public class SolutionSpaceTest {
 		SolutionSpace solSpace = new SolutionSpace(2);
 		Row row = new Row(Color.BLUE, Color.WHITE);
 		row.setRating(new RowRating(0, 2));
-		SolutionSpace filtered = solSpace.filter(row);
+		SolutionSpace filtered = solSpace.filterByRating(row);
 		assertThat(filtered.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.WHITE, Color.BLUE)));
 	}		
 	
@@ -101,7 +101,7 @@ public class SolutionSpaceTest {
 		SolutionSpace solSpace = new SolutionSpace(2);
 		Row row = new Row(Color.BLUE, Color.WHITE);
 		row.setRating(new RowRating(0, 2));
-		SolutionSpace filtered = solSpace.filter(row);
+		SolutionSpace filtered = solSpace.filterByRating(row);
 		assertThat(filtered.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.WHITE, Color.BLUE)));
 	}
 	
@@ -117,8 +117,8 @@ public class SolutionSpaceTest {
 		rowBlue.setRating(new RowRating(1, 0));
 		Row rowGreen = new Row(Color.GREEN);
 		rowGreen.setRating(new RowRating(1, 0));		
-		SolutionSpace blueFiltered = solSpace.filter(rowBlue);
-		SolutionSpace greenFiltered = solSpace.filter(rowGreen);
+		SolutionSpace blueFiltered = solSpace.filterByRating(rowBlue);
+		SolutionSpace greenFiltered = solSpace.filterByRating(rowGreen);
 		SolutionSpace intersect = blueFiltered.intersect(greenFiltered);
 		assertThat(intersect.getSolutionSpaceElements().length, is(0));
 	}	
@@ -128,7 +128,7 @@ public class SolutionSpaceTest {
 		SolutionSpace solSpace = new SolutionSpace(1);
 		Row rowBlue = new Row(Color.BLUE);
 		rowBlue.setRating(new RowRating(1, 0));		
-		SolutionSpace blueFiltered = solSpace.filter(rowBlue);
+		SolutionSpace blueFiltered = solSpace.filterByRating(rowBlue);
 		SolutionSpace intersect = blueFiltered.intersect(blueFiltered);
 		assertThat(intersect.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.BLUE)));
 	}	
@@ -138,7 +138,7 @@ public class SolutionSpaceTest {
 		SolutionSpace solSpace = new SolutionSpace(1);
 		Row rowBlue = new Row(Color.BLUE);
 		rowBlue.setRating(new RowRating(1, 0));		
-		SolutionSpace blueFiltered = solSpace.filter(rowBlue);
+		SolutionSpace blueFiltered = solSpace.filterByRating(rowBlue);
 		SolutionSpace intersect = new SolutionSpace(1).intersect(blueFiltered);
 		assertThat(intersect.getSolutionSpaceElements(), arrayContainingInAnyOrder(new Row(Color.BLUE)));
 	}		

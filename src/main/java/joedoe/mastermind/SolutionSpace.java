@@ -35,16 +35,23 @@ public class SolutionSpace {
 		return space.toArray(new Row[space.size()]);
 	}
 
-	public SolutionSpace filter(Row rowTemplate) {
+	public SolutionSpace filterByRating(Row rowTemplate) {
 		Preconditions.checkNotNull(rowTemplate);
 		Preconditions.checkArgument(rowTemplate.isRated());
 		List<Row> filteredElements = new ArrayList<Row>();
 		for (Row nextRowToMatch : getSolutionSpaceElements()) {
-			nextRowToMatch.rate(rowTemplate);
-			if (nextRowToMatch.getRating().equals(rowTemplate.getRating())) filteredElements.add(nextRowToMatch);
+			RowRating rating = nextRowToMatch.getRating(rowTemplate);
+			if (rating.equals(rowTemplate.getRating())) {
+				filteredElements.add(nextRowToMatch);				
+			}
 		}
 		return new SolutionSpace(filteredElements);
 	}
+	
+	public void remove(List<Row> rowsToRemove) {
+		space.removeAll(rowsToRemove);
+		
+	}	
 	
 	public boolean containsRow(Row row) {
 		return space.contains(row);
@@ -105,5 +112,7 @@ public class SolutionSpace {
 			space.add(row);
 		}
 	}
+
+
 
 }

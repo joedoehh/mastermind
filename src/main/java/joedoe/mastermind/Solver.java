@@ -25,18 +25,23 @@ public class Solver {
 		List<SolutionSpace> solutionSpaceHistory = new ArrayList<SolutionSpace>();
 		List<Row> solution = new ArrayList<Row>();
 		SolutionSpace currentSolutionSpace = new SolutionSpace(dimension);
-		Row currentSolution = null;
+		Row currentRow = null;
 		while(true){
 			// random pick solution			
-			currentSolution = currentSolutionSpace.randomPick();			
+			currentRow = currentSolutionSpace.randomPick();			
 			solutionSpaceHistory.add(currentSolutionSpace);
-			solution.add(currentSolution);
+			solution.add(currentRow);			
 			// exit if answer was found
-			Logger.info("picking {} from solution space with {} elements", currentSolution, currentSolutionSpace.getSolutionSpaceElements().length);
-			if (currentSolution.equals(target)) break;
+			Logger.info("picking {} from solution space with {} elements", currentRow, currentSolutionSpace.getSolutionSpaceElements().length);
+			if (currentRow.equals(target)) break;
 			// derive next step reduced solution space
-			currentSolution.rate(target);
-			currentSolutionSpace = currentSolutionSpace.filter(currentSolution);
+			target.rate(currentRow);
+			currentRow.setRating(target.getRating());
+			currentSolutionSpace = currentSolutionSpace.filterByRating(currentRow);
+			Logger.debug("filtered solution space has {} elements after filtering by rating", currentSolutionSpace.getSolutionSpaceElements().length);
+			// add current row to solution and remove all guessed rows from solution space
+			currentSolutionSpace.remove(solution);
+			Logger.debug("filtered solution space has {} elements after removing old misses", currentSolutionSpace.getSolutionSpaceElements().length);			
 		}
 		return solution;
 	}
