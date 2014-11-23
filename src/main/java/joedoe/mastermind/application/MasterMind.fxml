@@ -8,50 +8,68 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Separator prefWidth="200.0" />
-      <HBox prefHeight="37.0" prefWidth="795.0">
-         <children>
-            <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="NEVER">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-               </HBox.margin>
-            </Circle>
-            <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="NEVER">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-               </HBox.margin>
-            </Circle>
-            <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="NEVER">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-               </HBox.margin>
-            </Circle>
-            <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="NEVER">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-               </HBox.margin>
-            </Circle>
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <ToolBar prefHeight="40.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-              <items>
-                <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" text="White" textFill="#111011" />
-                  <Button mnemonicParsing="false" text="Grey" />
-                  <Button mnemonicParsing="false" text="Yellow" />
-                  <Button mnemonicParsing="false" text="Orange" />
-                  <Button mnemonicParsing="false" text="Pink" />
-                  <Button mnemonicParsing="false" text="Red" />
-                  <Button mnemonicParsing="false" text="Green" />
-                  <Button mnemonicParsing="false" text="Blue" />
-                  <Button cancelButton="true" mnemonicParsing="false" text="Clear" />
-              </items>
-            </ToolBar>
-         </children>
-      </HBox>
-      <Separator prefWidth="200.0" />
-      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="800.0" text="Solve" VBox.vgrow="NEVER" />
-      <Separator prefWidth="200.0" />
-      <TextArea prefHeight="500.0" prefWidth="800.0" />
-   </children>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+	minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"
+	fx:controller="joedoe.mastermind.application.MasterMindController"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Separator prefWidth="200.0" />
+		<HBox prefHeight="37.0" prefWidth="795.0">
+			<children>
+				<Circle fill="BLACK" radius="10.0" stroke="BLACK" strokeType="INSIDE"
+					HBox.hgrow="NEVER" fx:id="firstColorCircle">
+					<HBox.margin>
+						<Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+					</HBox.margin>
+				</Circle>
+				<Circle fill="BLACK" radius="10.0" stroke="BLACK" strokeType="INSIDE"
+					HBox.hgrow="NEVER" fx:id="secondColorCircle">
+					<HBox.margin>
+						<Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+					</HBox.margin>
+				</Circle>
+				<Circle fill="BLACK" radius="10.0" stroke="BLACK" strokeType="INSIDE"
+					HBox.hgrow="NEVER" fx:id="thirdColorCircle">
+					<HBox.margin>
+						<Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+					</HBox.margin>
+				</Circle>
+				<Circle fill="BLACK" radius="10.0" stroke="BLACK" strokeType="INSIDE"
+					HBox.hgrow="NEVER" fx:id="fourthColorCircle">
+					<HBox.margin>
+						<Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+					</HBox.margin>
+				</Circle>
+				<Separator orientation="VERTICAL" prefHeight="200.0" />
+				<ToolBar prefHeight="40.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+					<items>
+						<Button alignment="BOTTOM_LEFT" mnemonicParsing="false"
+							text="White" onAction="#colorButtonPressed" fx:id="whiteButton" />
+						<Button mnemonicParsing="false" text="Grey" onAction="#colorButtonPressed"
+							fx:id="greyButton" />
+						<Button mnemonicParsing="false" text="Yellow" onAction="#colorButtonPressed"
+							fx:id="yellowButton" />
+						<Button mnemonicParsing="false" text="Orange" onAction="#colorButtonPressed"
+							fx:id="orangeButton" />
+						<Button mnemonicParsing="false" text="Pink" onAction="#colorButtonPressed"
+							fx:id="pinkButton" />
+						<Button mnemonicParsing="false" text="Red" onAction="#colorButtonPressed"
+							fx:id="redButton" />
+						<Button mnemonicParsing="false" text="Green" onAction="#colorButtonPressed"
+							fx:id="greenButton" />
+						<Button mnemonicParsing="false" text="Blue" onAction="#colorButtonPressed"
+							fx:id="blueButton" />
+						<Button cancelButton="true" mnemonicParsing="false" text="Clear"
+							onAction="#clearButtonPressed" />
+					</items>
+				</ToolBar>
+			</children>
+		</HBox>
+		<Separator prefWidth="200.0" />
+		<Button mnemonicParsing="false" disable="true" prefHeight="25.0"
+			prefWidth="800.0" text="Solve" VBox.vgrow="NEVER" onAction="#solveButtonPressed"
+			fx:id="solveButton" />
+		<Separator prefWidth="200.0" />
+		<TextArea prefHeight="500.0" prefWidth="800.0" fx:id="solutionTextArea"/>
+	</children>
 </VBox>

@@ -15,6 +15,7 @@ public class MasterMindApp extends Application {
 			Scene scene = new Scene(root,800,500);
 			scene.getStylesheets().add(getClass().getResource("MasterMind.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Mastermind Solver");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
