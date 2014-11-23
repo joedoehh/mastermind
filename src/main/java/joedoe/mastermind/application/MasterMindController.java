@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 import joedoe.mastermind.core.Solver;
 import joedoe.mastermind.types.Color;
 import joedoe.mastermind.types.Row;
+import joedoe.mastermind.types.SolutionSpace;
 
 public class MasterMindController {
 
@@ -54,7 +55,7 @@ public class MasterMindController {
 
 	@FXML
 	private Button solveButton;
-	
+
 	@FXML
 	private TextArea solutionTextArea;
 
@@ -92,17 +93,46 @@ public class MasterMindController {
 		disableAllColorButtons(false);
 		disableSolveButton(true);
 		colorCircles();
+		solutionTextArea.setText("");
 	}
 
 	@FXML
 	protected void solveButtonPressed(ActionEvent event) {
 		Solver solver = new Solver(rowModel.getRow());
-		List<Row> result = solver.solve();
-		for (Row row : result) {
-			solutionTextArea.appendText(row.toString() + "\n");
+		solver.solve();
+		List<SolutionSpace> solutionSpaceHistory = solver
+				.getSolutionSpaceHistory();
+		List<Row> solution = solver.getSolution();
+		int i = 0;
+		for (Row row : solution) {
+			// print nr
+			solutionTextArea.appendText(i+1 + ": ");
+			// print row
+			for (int j = 0; j < 4; j++) {
+				solutionTextArea.appendText(row.getColor(j) + " ");
+			}
+			// print rating
+			if (row.getRating() != null) {
+				solutionTextArea.appendText(" : ");
+				solutionTextArea.appendText(" Exact Matches ="
+						+ row.getRating().getNrExactMatch() + ", ");
+				solutionTextArea.appendText(" Only Color Matches ="
+						+ row.getRating().getNrOnlyColorMatch());
+			}
+			// print solution space size
+			if (solutionSpaceHistory.get(i) != null) {
+				solutionTextArea.appendText(" : ");
+				solutionTextArea.appendText(" Solution Space Size ="
+						+ solutionSpaceHistory.get(i)
+								.getSolutionSpaceElements().length);
+			}
+			solutionTextArea.appendText("\n");
+			i++;
 		}
-	}	
-	
+		solutionTextArea
+				.appendText("\n-----------------------------------------\n");
+	}
+
 	private void disableAllColorButtons(boolean disable) {
 		whiteButton.setDisable(disable);
 		greyButton.setDisable(disable);

@@ -24,9 +24,9 @@ public class Solver {
 		this.dimension = target.getDimension();
 	}	
 	
-	public List<Row> solve() {	
-		List<SolutionSpace> solutionSpaceHistory = new ArrayList<SolutionSpace>();
-		List<Row> solution = new ArrayList<Row>();
+	public void solve() {	
+		solutionSpaceHistory = new ArrayList<SolutionSpace>();
+		solution = new ArrayList<Row>();
 		SolutionSpace currentSolutionSpace = new SolutionSpace(dimension);
 		Row currentRow = null;
 		while(true){
@@ -46,7 +46,14 @@ public class Solver {
 			currentSolutionSpace.remove(solution);
 			Logger.debug("filtered solution space has {} elements after removing old misses", currentSolutionSpace.getSolutionSpaceElements().length);			
 		}
+	}
+
+	public List<SolutionSpace> getSolutionSpaceHistory() {
+		return solutionSpaceHistory;
+	}
+
+	public List<Row> getSolution() {
 		return solution;
 	}
-	
+		
 }

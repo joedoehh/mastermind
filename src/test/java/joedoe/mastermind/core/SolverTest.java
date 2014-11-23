@@ -1,11 +1,7 @@
 package joedoe.mastermind.core;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-
-import java.util.List;
-
-import joedoe.mastermind.core.Solver;
 import joedoe.mastermind.types.Color;
 import joedoe.mastermind.types.Row;
 
@@ -38,8 +34,8 @@ public class SolverTest {
 	private void testLengthN(Row target) {
 		Preconditions.checkNotNull(target);
 		Solver solver = new Solver(target);
-		List<Row> result = solver.solve();
+		solver.solve();
 		// last element in result is expected to be target
-		assertThat(result.get(result.size()-1), is(target));
+		assertThat(solver.getSolution().get(solver.getSolution().size()-1), is(target));
 	}
 }
