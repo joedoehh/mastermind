@@ -70,6 +70,16 @@ public class Row {
 		return row[position];
 	}
 
+	public String[] getColorAsStrings() {
+		String[] returnValue = new String[row.length];
+		int i=0;
+		for (Color color : row) {
+			returnValue[i] = color.name();
+			i++;
+		}
+		return returnValue;
+	}
+	
 	public boolean isRated() {
 		return rating != null;
 	}

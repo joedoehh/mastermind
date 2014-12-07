@@ -1,0 +1,2 @@
+cmdhistory=["(create-solution-space)" "(def x 1)" "(def x 2)" "x" "(def v [red green])" "(def all-colors (\\"red\\" \\"green\\"))" "(def ac (vector \\"red\\"))" "(def all-colors (vector \\"WHITE\\" \\"BLUE\\" \\"RED\\" \\"GREY\\" \\"PINK\\" \\"ORANGE\\" \\"YELLOW\\" \\"GREEN\\"))" "(get all-colors 0)" "(use 'joedoe.mastermind.core.clojure \:reload)"]
+eclipse.preferences.version=1

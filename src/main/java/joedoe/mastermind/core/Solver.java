@@ -11,6 +11,7 @@ import org.pmw.tinylog.Logger;
 import com.google.common.base.Preconditions;
 
 public class Solver {
+	// TODO  abstract with interface and have to implementatiosn of solver: java and clojure
 	
 	private int dimension;
 	private Row target;

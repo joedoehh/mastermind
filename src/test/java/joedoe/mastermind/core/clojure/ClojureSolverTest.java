@@ -1,4 +1,4 @@
-package joedoe.mastermind.core;
+package joedoe.mastermind.core.clojure;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.google.common.base.Preconditions;
 
-public class SolverTest {
+public class ClojureSolverTest {
 
 	@Test
 	public void testLength1() {
@@ -33,7 +33,12 @@ public class SolverTest {
 	
 	private void testLengthN(Row target) {
 		Preconditions.checkNotNull(target);
-		Solver solver = new Solver(target); 
+		ClojureSolver solver;
+		try {
+			solver = new ClojureSolver(target);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} 
 		solver.solve();
 		// last element in result is expected to be target
 		assertThat(solver.getSolution().get(solver.getSolution().size()-1), is(target));
